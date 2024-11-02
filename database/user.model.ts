@@ -1,4 +1,5 @@
 import { models, model, Schema, Document } from "mongoose";
+import { UserRole } from "./UserRole.enum";
 
 export interface IUser extends Document {
   name: string;
@@ -6,6 +7,7 @@ export interface IUser extends Document {
   email: string;
   password?: string;
   image?: string;
+  role: UserRole;
   emailVerified: boolean;
   accounts: Schema.Types.ObjectId[];
   joinedAt: Date;
@@ -17,11 +19,16 @@ const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String },
   image: { type: String },
+  role: {
+    type: String,
+    enum: Object.values(UserRole), // Restrict to values from UserRole enum
+    default: UserRole.User, // Default to UserRole.User
+  },
   emailVerified: { type: Date },
   accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
   joinedAt: { type: Date, default: Date.now },
 });
 
-const User = models.User || model("User", UserSchema);
+const User = models?.User || model("User", UserSchema);
 
 export default User;
