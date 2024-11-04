@@ -19,8 +19,10 @@ import FormError from "@/components/FormError";
 import FormSuccess from "@/components/FormSuccess";
 
 import { register } from "@/lib/actions/register";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter()
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
@@ -42,7 +44,9 @@ const RegisterForm = () => {
         setSuccess(data?.success);
         setError(data?.error);
       });
+    
     });
+   
   }
 
   return (

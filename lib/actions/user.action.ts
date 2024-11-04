@@ -22,3 +22,15 @@ export async function getUserById(_id: string) {
     console.log(error);
   }
 }
+
+
+
+export async function getUserByUsername(username: string) {
+  try {
+    connectToDatabase();
+    const user = await User.findOne({ username });
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}

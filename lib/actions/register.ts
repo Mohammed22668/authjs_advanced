@@ -5,7 +5,7 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import User from "@/database/user.model";
 import { connectToDatabase } from "../mongoose";
-import { getUserByEmail } from "./user.action";
+import { getUserByEmail, getUserByUsername } from "./user.action";
 
 export async function register(values: z.infer<typeof RegisterSchema>) {
   try {
@@ -23,9 +23,13 @@ export async function register(values: z.infer<typeof RegisterSchema>) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Check if a user with the same email already exists
-    const existingUser = await getUserByEmail(email);
-    if (existingUser) {
+    const existingUserEmail = await getUserByEmail(email);
+    if (existingUserEmail) {
       return { error: "Email already exists!" };
+    }
+    const existingUserUsername =  await getUserByUsername(username)
+    if (existingUserUsername) {
+      return { error: "Username already exists!" };
     }
 
     // Create the new user
