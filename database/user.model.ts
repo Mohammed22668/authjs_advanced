@@ -9,7 +9,7 @@ export interface IUser extends Document {
   image?: string;
   role: UserRole;
   emailVerified: boolean;
-  accounts: Schema.Types.ObjectId[];
+
   joinedAt: Date;
 }
 
@@ -25,7 +25,7 @@ const UserSchema = new Schema({
     default: UserRole.User, // Default to UserRole.User
   },
   emailVerified: { type: Date },
-  accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
+
   joinedAt: { type: Date, default: Date.now },
 });
 

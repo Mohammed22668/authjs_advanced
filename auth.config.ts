@@ -2,9 +2,10 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { LoginSchema } from "@/schemas";
-import {  getUserByUsername } from "./lib/actions/user.action";
+
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import { getUserByUsername } from "./lib/actions/prisma_actions/user.action";
 
 export default {
   providers: [
@@ -23,6 +24,7 @@ export default {
         if (validateFields.success) {
           const { username, password } = validateFields.data;
           const user = await getUserByUsername(username);
+          console.log("User=>: ", user);
 
           if (!user || !user.password) return null;
           const passwordMatch = await bcrypt.compare(password, user.password);

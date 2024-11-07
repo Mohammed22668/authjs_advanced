@@ -3,7 +3,7 @@ import { UserRole } from "@/database/UserRole.enum";
 
 export type ExtendedUser = DefaultSession["user"] & {
   role: UserRole;
-  username: String;
+  username: string;
 };
 
 declare module "next-auth" {
