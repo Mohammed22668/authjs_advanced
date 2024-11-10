@@ -1,6 +1,7 @@
 import React from "react";
 import { auth, signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const page = async () => {
   const session = await auth();
@@ -16,6 +17,12 @@ const page = async () => {
       >
         <Button>LogOut</Button>
       </form>
+
+      <Link href="/users">
+      <Button>
+        All User
+      </Button>
+      </Link>
     </>
   );
 };

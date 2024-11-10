@@ -34,3 +34,28 @@ export async function getUserByUsername(username: string) {
     console.log(error);
   }
 }
+
+
+
+export async function getAllUsers() {
+  try {
+    
+    connectToDatabase();
+    const users = await User.find()
+    return users
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+export async function getUsersByFilters(role:string) {
+  try {
+    
+    connectToDatabase()
+    const users = await User.find({role:role})
+    return users
+  } catch (error) {
+    console.log(error)
+  }
+}
