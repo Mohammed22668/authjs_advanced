@@ -13,17 +13,15 @@ export async function getUserByEmail(email: string) {
   }
 }
 
-export async function getUserById(_id: string) {
+export async function getUserById(id: string) {
   try {
     connectToDatabase();
-    const user = await User.findOne({ _id });
+    const user = await User.findOne({ id });
     return user;
   } catch (error) {
     console.log(error);
   }
 }
-
-
 
 export async function getUserByUsername(username: string) {
   try {

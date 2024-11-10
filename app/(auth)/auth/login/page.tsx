@@ -1,7 +1,7 @@
 import LoginForm from "@/components/auth/LoginForm";
 import React from "react";
 
-const LoginPage = () => {
+const page = () => {
   return (
     <div>
       <LoginForm />
@@ -9,4 +9,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default page;

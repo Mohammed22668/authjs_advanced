@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { getUserById } from "@/lib/actions/user.action";
+
 import { UserRole } from "@/database/UserRole.enum";
 import { prisma } from "./lib/prisma";
+import { getUserById } from "./lib/actions/prisma_actions/user.action";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   pages: {
